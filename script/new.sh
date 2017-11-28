@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly REPOROOT=$(dirname $(realpath $0/../));
+readonly REPOROOT=$(realpath $(dirname $0)/..);
 
 section=""
 while [ -z $section ]; do
