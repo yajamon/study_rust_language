@@ -17,4 +17,8 @@ fn main() {
     // mut はパターンの一部になれる
     let (mut first, second) = (1, 2);
 
+    // 外側のミュータビリティ
+    let arc = Arc::new(5);
+    let cloned = arc.clone();
+
 }
