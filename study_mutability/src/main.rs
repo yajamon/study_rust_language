@@ -1,4 +1,12 @@
 use std::sync::Arc;
+use std::cell::RefCell;
+
+struct Point {
+    x: i32,
+    y: i32,
+    // 以下のようにはかけない
+    // mut y: i32,
+}
 
 fn main() {
     // Error
@@ -28,5 +36,7 @@ fn main() {
     let cell = RefCell::new(42);
     let mut_cell = cell.borrow_mut();  // 内側の値に対する &mut を配るらしい
     let mut_cell2 = cell.borrow_mut(); // 複数の &mut 参照を配ると panic! するらしい
+
+    // フィールド・レベルのミュータビリティ
 
 }
