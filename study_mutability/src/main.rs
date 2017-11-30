@@ -20,5 +20,13 @@ fn main() {
     // 外側のミュータビリティ
     let arc = Arc::new(5);
     let cloned = arc.clone();
+    // ArcはAtomicReferenceCountedの略称
+    // すなわち、clone()を呼び出す時に参照カウントを更新する必要がある
+    // まぁとにかく、Arc<T>.clone()は&Tを返す
+
+    // 内側のミュータビリティ
+    let cell = RefCell::new(42);
+    let mut_cell = cell.borrow_mut();  // 内側の値に対する &mut を配るらしい
+    let mut_cell2 = cell.borrow_mut(); // 複数の &mut 参照を配ると panic! するらしい
 
 }
