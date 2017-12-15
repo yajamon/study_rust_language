@@ -1,4 +1,16 @@
 use std::sync::Arc;
+use std::cell::{RefCell, Cell};
+
+struct Point {
+    x: i32,
+    y: i32,
+    // 以下のようにはかけない
+    // mut y: i32,
+}
+struct EditablePoint {
+    x: i32,
+    y: Cell<i32>,
+}
 
 fn main() {
     // Error
@@ -27,6 +39,16 @@ fn main() {
     // 内側のミュータビリティ
     let cell = RefCell::new(42);
     let mut_cell = cell.borrow_mut();  // 内側の値に対する &mut を配るらしい
-    let mut_cell2 = cell.borrow_mut(); // 複数の &mut 参照を配ると panic! するらしい
+    // let mut_cell2 = cell.borrow_mut(); // 複数の &mut 参照を配ると panic! する
 
+    // フィールド・レベルのミュータビリティ
+    let mut a = Point { x: 5, y: 6};
+    a.x = 10;
+
+    let a = Point { x: 5, y: 6};
+    // b.x = 10; // エラー: イミュータブルなフィールドに代入はできない
+
+    let point = EditablePoint { x: 5, y: Cell::new(6) };
+    point.y.set(7);
+    println!("y: {:?}", point.y);
 }
