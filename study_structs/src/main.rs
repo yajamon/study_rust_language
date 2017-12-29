@@ -1,3 +1,13 @@
+struct Point {
+    x: i32,
+    y: i32,
+}
+
 fn main() {
-    println!("Hello, world!");
+    // structにまとめることで、以下のように書かなくてよくなる。
+    // let origin_x = 0;
+    // let origin_y = 0;
+    let origin = Point {x: 0, y: 0};
+
+    println!("The origin is at ({}, {})", origin.x, origin.y);
 }
