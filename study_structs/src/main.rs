@@ -8,10 +8,10 @@ fn main() {
     // structにまとめることで、以下のように書かなくてよくなる。
     // let origin_x = 0;
     // let origin_y = 0;
-    let origin = Point {x: 0, y: 0};
+    let origin = Point { x: 0, y: 0 };
 
     // 束縛にミュータビリティを付与することで値を変更できる
-    let mut point = Point { x: 0, y: 0};
+    let mut point = Point { x: 0, y: 0 };
     point.x = 5;
 
     // 新しい束縛によってここから変更できなくなる
