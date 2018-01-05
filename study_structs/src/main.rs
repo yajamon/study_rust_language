@@ -15,6 +15,9 @@ struct Color(i32, i32, i32);
 // - ただの値と区別できるようになる
 struct Inches(i32);
 
+// Unit-like構造体
+struct Electron;
+
 fn main() {
     // structにまとめることで、以下のように書かなくてよくなる。
     // let origin_x = 0;
@@ -46,4 +49,7 @@ fn main() {
     // let分解で中の値を取り出せる
     let Inches(integer_length) = length;
     println!("length is {} inches", integer_length);
+
+    // 全くメンバを持たないstructはUnit likeと言われる
+    let x = Electron;
 }
