@@ -3,6 +3,17 @@ struct Point {
     x: i32,
     y: i32,
 }
+struct Point3d {
+    x: i32,
+    y: i32,
+    z: i32,
+}
+
+// タプル構造体
+struct Color(i32, i32, i32);
+// newtypeパターン
+// - ただの値と区別できるようになる
+struct Inches(i32);
 
 fn main() {
     // structにまとめることで、以下のように書かなくてよくなる。
@@ -27,4 +38,12 @@ fn main() {
     let mut point = Point3d { x: 0, y: 0, z: 0 };
     point = Point3d { y: 0, ..point };
 
+    // タプル構造体
+    let black = Color(0, 0, 0);
+
+    // newtypeパターン
+    let length = Inches(10);
+    // let分解で中の値を取り出せる
+    let Inches(integer_length) = length;
+    println!("length is {} inches", integer_length);
 }
