@@ -21,4 +21,10 @@ fn main() {
     // point.y = 6;
 
     println!("The origin is at ({}, {})", origin.x, origin.y);
+
+    // アップデート構文
+    // 初期化時に他の構造体から値をコピーすることができる
+    let mut point = Point3d { x: 0, y: 0, z: 0 };
+    point = Point3d { y: 0, ..point };
+
 }
