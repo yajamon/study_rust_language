@@ -22,4 +22,13 @@ fn main() {
         Pass,
     }
     let y: BoardGameTurn = BoardGameTurn::Move { squares: 1 };
+
+    // 列挙型の値は、ヴァリアントに関連するデータに加えて、
+    // その値自身がどのヴァリアントかという情報を持つ
+    // コンパイラはこれを利用して、安全なアクセスを強制する
+    //
+    // 以下のようには書けない
+    // fn process_color_change(msg: Message) {
+    //     let Message::ChangeColor(r, g, b) = msg
+    // }
 }
