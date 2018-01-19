@@ -26,6 +26,13 @@ macro_rules! builder {
                     $($attr_name : self.$attr_name.clone()),*
                 }
             }
+
+            $(
+                pub fn $attr_name(&mut self, value: $attr_type) -> &mut Self {
+                    self.$attr_name = value;
+                    self
+                }
+            )*
         }
     }
 }
@@ -39,6 +46,9 @@ fn main() {
         name: String = "hoge".to_string()
     });
 
-    let user = UserBuilder::new().build();
+    let user = UserBuilder::new()
+        .id(3)
+        .name("PopRopBob".to_string())
+        .build();
     println!("id: {}, name: {}", user.id, user.name);
 }
