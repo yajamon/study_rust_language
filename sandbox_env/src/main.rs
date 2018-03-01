@@ -13,4 +13,10 @@ fn main() {
     for argument in env::args() {
         println!("{}", argument);
     }
+
+    // 環境変数も振り回すこともできる
+    println!("環境変数の一覧");
+    for (key, val) in env::vars() {
+        println!("{}: {:?}", key, val);
+    }
 }
