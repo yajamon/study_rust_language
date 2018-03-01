@@ -19,4 +19,10 @@ fn main() {
     for (key, val) in env::vars() {
         println!("{}: {:?}", key, val);
     }
+
+    // HOMEディレクトリPATHへのショートカットもある
+    match env::home_dir() {
+        Some(path) => println!("home_dir: {:?}", path),
+        None => println!("見つかりませんでした"),
+    }
 }
