@@ -22,6 +22,23 @@ fn get_config(version: u8) -> ConfigList {
 enum ConfigList {
     V01(ConfigV01),
     V02(ConfigV02),
+    V03(ConfigV03),
+}
+
+#[derive(Debug)]
+struct ConfigV03 {
+    version: u8,
+    a: String,
+    b: String,
+}
+impl From<ConfigV02> for ConfigV03 {
+    fn from(config: ConfigV02) -> Self {
+        ConfigV03 {
+            version: config.version,
+            a: config.a.clone(),
+            b: format!("String '{}' by A", config.a),
+        }
+    }
 }
 
 #[derive(Debug)]
