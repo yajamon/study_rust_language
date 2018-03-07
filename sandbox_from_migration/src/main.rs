@@ -7,6 +7,8 @@ fn main() {
     }
 }
 
+type Config = ConfigV03;
+
 fn get_config(version: u8) -> ConfigList {
     match version {
         1 => ConfigList::V01(ConfigV01 { version: version }),
@@ -15,6 +17,17 @@ fn get_config(version: u8) -> ConfigList {
             a: "AAA".to_string(),
         }),
         _ => panic!("undefined version: {}", version),
+    }
+}
+
+fn migrate(config: ConfigList) -> Config {
+    let mut config = config;
+    loop {
+        config = match config {
+            ConfigList::V01(c) => ConfigList::V02(ConfigV02::from(c)),
+            ConfigList::V02(c) => ConfigList::V03(ConfigV03::from(c)),
+            ConfigList::V03(c) => return c,
+        };
     }
 }
 
