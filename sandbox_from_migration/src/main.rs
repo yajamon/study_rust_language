@@ -1,10 +1,8 @@
 fn main() {
     let c = get_config(1);
     println!("config: {:?}", c);
-    if let ConfigList::V01(config) = c {
-        let c = ConfigV02::from(config);
-        println!("config: {:?}", c);
-    }
+    let c = migrate(c);
+    println!("config: {:?}", c);
 }
 
 type Config = ConfigV03;
