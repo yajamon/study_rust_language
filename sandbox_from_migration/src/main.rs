@@ -23,11 +23,11 @@ enum ConfigList {
 }
 
 #[derive(Debug)]
-struct ConfigV01 {
-    version: u8,
-}
-#[derive(Debug)]
 struct ConfigV02 {
     version: u8,
     a: String,
+}
+#[derive(Debug)]
+struct ConfigV01 {
+    version: u8,
 }
