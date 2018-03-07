@@ -1,8 +1,10 @@
 fn main() {
     let c = get_config(1);
     println!("config: {:?}", c);
-    let c2: ConfigList = get_config(2);
-    println!("config: {:?}", c);
+    if let ConfigList::V01(config) = c {
+        let c = ConfigV02::from(config);
+        println!("config: {:?}", c);
+    }
 }
 
 fn get_config(version: u8) -> ConfigList {
