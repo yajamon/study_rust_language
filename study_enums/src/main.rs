@@ -31,4 +31,21 @@ fn main() {
     // fn process_color_change(msg: Message) {
     //     let Message::ChangeColor(r, g, b) = msg
     // }
+    //
+    // この制限は match 式でヴァリアントのパターンマッチを行う
+    // または、等値性を実装する（トレイトのセクションで説明）
+
+    // コンストラクタを関数のように扱うこともできる
+    let m = Message::Write("Hello, world".to_string());
+
+    // これは以下と同じだそう
+    fn foo(x: String) -> Message {
+        Message::Write(x)
+    }
+    let x = foo("Hello, world".to_string());
+
+    // これはクロージャのセクションで効いてくるらしい。
+    // イテレータと合わせて StringのベクタからMessage::Writeのベクタへ変換できる
+    let v = vec!["Hello".to_string(), "World".to_string()];
+    let v1: Vec<Message> = v.into_iter().map(Message::Write).collect();
 }
