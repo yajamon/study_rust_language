@@ -9,7 +9,7 @@ while [ -z $section ]; do
 done
 
 cd $REPOROOT
-cargo new study_$section --bin
-git checkout -b $section
+cargo new sandbox_$section --bin
+git checkout -b sandbox/$section
 
-git add $REPOROOT/study_$section
+git add $REPOROOT/sandbox_$section
