@@ -1,11 +1,11 @@
 fn main() {
     let c = get_config(1);
     println!("config: {:?}", c);
-    let c2: Config = migrate(c);
+    let c2: Config = c.migrate();
     println!("config: {:?}", c2);
 }
 
-type Config = ConfigV02;
+type Config = ConfigV03;
 
 fn get_config(version: u8) -> ConfigList {
     match version {
@@ -22,28 +22,32 @@ fn get_config(version: u8) -> ConfigList {
     }
 }
 
-fn migrate(config: ConfigList) -> Config {
-    let mut config = config;
-    loop {
-        config = match config {
-            ConfigList::V01(c) => ConfigList::V02(c.into()),
-            ConfigList::V02(c) => return c,
+#[derive(Debug, Clone)]
+enum ConfigList {
+    V01(ConfigV01),
+    V02(ConfigV02),
+    V03(ConfigV03),
+}
+
+impl ConfigList {
+    fn migrate(&self) -> Config {
+        let mut config: ConfigList = self.clone();
+        loop {
+            config = match config {
+                ConfigList::V01(c) => ConfigList::V02(c.into()),
+                ConfigList::V02(c) => ConfigList::V03(c.into()),
+                ConfigList::V03(c) => return c,
+            }
         }
     }
 }
 
-#[derive(Debug)]
-enum ConfigList {
-    V01(ConfigV01),
-    V02(ConfigV02),
-}
-
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct ConfigV01 {
     version: u8,
     a: String,
 }
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct ConfigV02 {
     version: u8,
     a: String,
@@ -51,11 +55,30 @@ struct ConfigV02 {
 }
 
 impl From<ConfigV01> for ConfigV02 {
-    fn from(c: ConfigV01) -> ConfigV02 {
+    fn from(c: ConfigV01) -> Self {
         ConfigV02 {
             version: 2,
             a: c.a.clone(),
             b: "migration".to_string(),
+        }
+    }
+}
+
+#[derive(Debug, Clone)]
+struct ConfigV03 {
+    version: u8,
+    a: String,
+    b: String,
+    c: bool,
+}
+
+impl From<ConfigV02> for ConfigV03 {
+    fn from(c: ConfigV02) -> Self {
+        ConfigV03 {
+            version: 3,
+            a: c.a.clone(),
+            b: c.b.clone(),
+            c: true,
         }
     }
 }
