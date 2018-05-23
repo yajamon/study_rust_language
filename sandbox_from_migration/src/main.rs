@@ -82,3 +82,17 @@ impl From<ConfigV02> for ConfigV03 {
         }
     }
 }
+// 一つ前のバージョンをmigrate
+impl From<ConfigV01> for ConfigV02 {
+    fn from(config: ConfigV01) -> Self {
+        ConfigV02 {
+            version: config.version,
+            a: "Migrated".to_string(),
+        }
+    }
+}
+
+#[derive(Debug)]
+struct ConfigV01 {
+    version: u8,
+}
