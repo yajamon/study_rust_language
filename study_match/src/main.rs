@@ -26,6 +26,28 @@ fn main() {
     process_mesasge(Message::ChangeColor(0, 127, 255));
     process_mesasge(Message::Move { x: 2, y: 5 });
     process_mesasge(Message::Write("text".to_string()));
+
+    // 列挙型のバリアントに基づいた分岐について、特定のものだけを対象としたい場合
+    // 分岐に if を使うことはできない。
+    // if Message::Quit == msg {
+    //     // たとえば、このようなこと
+    // }
+    //
+    // 列挙型のバリアントに基づいた分岐には if let 文も使うことができる。
+    let msg = Message::ChangeColor(100, 10, 1);
+    if let Message::ChangeColor(r, g, b) = msg {
+        change_color(r, g, b);
+        change_color(r, g, b);
+    }
+    // if letはmatchの短縮形と捉えることができる。
+    let msg = Message::ChangeColor(25, 50, 75);
+    match msg {
+        Message::ChangeColor(r, g, b) => {
+            change_color(r, g, b);
+            change_color(r, g, b);
+        }
+        _ => {}
+    }
 }
 
 // 列挙型に対するmatchは網羅性検査と合わさって非常に重要
