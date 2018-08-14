@@ -10,4 +10,15 @@ fn main() {
         // matchは網羅性検査を行う。アンダースコアはその他の値すべてを受け入れる。
         _ => println!("something else"),
     }
+
+    // matchは式でもある。つまり、下記のようなことができる。
+    let number = match x {
+        1 => "one",
+        2 => "two",
+        3 => "three",
+        4 => "four",
+        5 => "five",
+        _ => "something else",
+    };
+    println!("{}", number);
 }
