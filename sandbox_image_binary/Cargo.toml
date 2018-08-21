@@ -1,0 +1,6 @@
+[package]
+name = "sandbox_image_binary"
+version = "0.1.0"
+authors = ["yajamon <yajamon.tatsuki@gmail.com>"]
+
+[dependencies]
