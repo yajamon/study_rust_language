@@ -1,0 +1,6 @@
+[package]
+name = "study_pattern"
+version = "0.1.0"
+authors = ["yajamon <yajamon.tatsuki@gmail.com>"]
+
+[dependencies]
