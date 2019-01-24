@@ -57,4 +57,18 @@ fn main() {
     match origin {
         Point { y, .. } => println!("y is {}", y),
     }
+
+    // 束縛の無視
+    // パターン内の型や値を無視するために `_` を使うことができる
+    let some_value: Result<u32, ()> = Ok(123);
+    match some_value {
+        Ok(value) => println!("got a value: {}", value),
+        Err(_) => println!("an error occurred"),
+    }
+    // タプルでも
+    fn coordinate() -> (i32, i32, i32) {
+        (1, 10, 100)
+    }
+    let (x, _, z) = coordinate();
+    println!("x: {} z: {}", x, z);
 }
