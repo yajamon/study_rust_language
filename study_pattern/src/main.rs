@@ -99,4 +99,33 @@ fn main() {
         'k'...'z' => println!("late letter"),
         _ => println!("something else"),
     }
+
+    // 束縛
+    // `@`で値に名前を束縛できる
+    let x = 1;
+    match x {
+        e @ 1...5 => println!("got a range element: {}", e),
+        _ => println!("anything"),
+    }
+    // 複雑なマッチング
+    #[derive(Debug)]
+    struct Person {
+        name: Option<String>,
+    }
+    let name = "Steve".to_string();
+    let mut x: Option<Person> = Some(Person { name: Some(name) });
+    match x {
+        Some(Person {
+            name: ref a @ Some(_),
+            ..
+        }) => println!("{:?}", a),
+        _ => {}
+    }
+    // @ と | を組み合わせるパターン
+    // それぞれのパターンで同じ名前で束縛する必要がある
+    let x = 5;
+    match x {
+        e @ 1...5 | e @ 8...10 => println!("got a range element: {}", e),
+        _ => println!("anything"),
+    }
 }
