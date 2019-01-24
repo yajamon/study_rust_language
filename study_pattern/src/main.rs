@@ -84,4 +84,19 @@ fn main() {
     match p {
         ref mut r => println!("print x: {}, y: {}", r.x, r.y),
     }
+
+    // 範囲
+    // `...` で値の範囲をマッチさせることができる
+    let x = 1;
+    match x {
+        1...5 => println!("one through five"),
+        _ => println!("anything"),
+    }
+    // char型でも使われる
+    let x = '🎁';
+    match x {
+        'a'...'j' => println!("early letter"),
+        'k'...'z' => println!("late letter"),
+        _ => println!("something else"),
+    }
 }
