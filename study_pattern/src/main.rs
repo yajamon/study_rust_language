@@ -71,4 +71,17 @@ fn main() {
     }
     let (x, _, z) = coordinate();
     println!("x: {} z: {}", x, z);
+
+    // ref, ref mutキーワードで参照を取得できる
+    let p = Point { x: 1, y: 3 };
+    match p {
+        ref r => println!("print x: {}, y: {}", r.x, r.y),
+    }
+    // pがmoveしていない
+    println!("print x: {}, y: {}", p.x, p.y);
+    // mutableな参照も同様に書ける
+    let mut p = Point { x: 2, y: 4 };
+    match p {
+        ref mut r => println!("print x: {}, y: {}", r.x, r.y),
+    }
 }
