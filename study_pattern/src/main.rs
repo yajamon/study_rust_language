@@ -128,4 +128,24 @@ fn main() {
         e @ 1...5 | e @ 8...10 => println!("got a range element: {}", e),
         _ => println!("anything"),
     }
+
+    // ガード
+    // if を使うことでパターン中にガードができる
+    enum OptionalInt {
+        Value(i32),
+        Missing,
+    }
+    let x = OptionalInt::Value(5);
+    match x {
+        OptionalInt::Value(i) if i > 5 => println!("Got an bigger than five!"),
+        OptionalInt::Value(..) => println!("Got an int!"),
+        OptionalInt::Missing => println!("No such luck."),
+    }
+    // 複式パターンでifを使うと、ifは | の両側に適用される
+    let x = 4;
+    let y = false;
+    match x {
+        4 | 5 if y => println!("yes"),
+        _ => println!("no"),
+    }
 }
