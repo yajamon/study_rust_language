@@ -35,4 +35,15 @@ fn main() {
         3 => println!("three"),
         _ => println!("anything"),
     }
+
+    // 分配拘束
+    // structのような複合データ構造が存在するとき、パターン内で分解できる
+    struct Point {
+        x: i32,
+        y: i32,
+    }
+    let origin = Point { x: 0, y: 0 };
+    match origin {
+        Point { x, y } => println!("({}, {})", x, y),
+    }
 }
