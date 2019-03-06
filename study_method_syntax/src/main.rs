@@ -18,6 +18,14 @@ impl Circle {
         }
     }
 }
+
+// 好きなだけimplブロックを使用できる
+impl Circle {
+    fn reference(&self) {
+        println!("taking self by reference!");
+    }
+}
+
 fn main() {
     // Rustは `impl` キーワードによって「メソッド呼び出し構文」の機能を提供している
 
