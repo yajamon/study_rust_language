@@ -37,6 +37,43 @@ impl Circle {
     }
 }
 
+// ユーザがCircleを作成できるようにしつつも、書き換えたいプロパティだけ設定するようにしたい
+// Rustにはメソッドのオーバーロードや名前付き引数、可変子引数といった機能がない
+// そのかわりにBuilderパターンを採用している
+struct CircleBuilder {
+    x: f64,
+    y: f64,
+    radius: f64,
+}
+impl CircleBuilder {
+    fn new() -> CircleBuilder {
+        CircleBuilder {
+            x: 0.0,
+            y: 0.0,
+            radius: 1.0,
+        }
+    }
+    fn x(&mut self, coordinate: f64) -> &mut CircleBuilder {
+        self.x = coordinate;
+        self
+    }
+    fn y(&mut self, coordinate: f64) -> &mut CircleBuilder {
+        self.y = coordinate;
+        self
+    }
+    fn radius(&mut self, radius: f64) -> &mut CircleBuilder {
+        self.radius = radius;
+        self
+    }
+    fn finalize(&self) -> Circle {
+        Circle {
+            x: self.x,
+            y: self.y,
+            radius: self.radius,
+        }
+    }
+}
+
 fn main() {
     // Rustは `impl` キーワードによって「メソッド呼び出し構文」の機能を提供している
 
@@ -50,4 +87,10 @@ fn main() {
     println!("{}", c.area());
     let d = c.grow(2.0).area();
     println!("{}", d);
+
+    // Builderパターンによる書き方はこんなかんじ
+    let c = CircleBuilder::new().x(1.0).y(2.0).radius(2.0).finalize();
+    println!("area: {}", c.area());
+    println!("x: {}", c.x);
+    println!("y: {}", c.y);
 }
