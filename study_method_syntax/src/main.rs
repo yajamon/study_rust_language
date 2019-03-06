@@ -5,8 +5,17 @@ struct Circle {
 }
 
 impl Circle {
+    // 特別な第一引数 `self` (変形として `&self` `&mut self`)
     fn area(&self) -> f64 {
         std::f64::consts::PI * (self.radius * self.radius)
+    }
+    // Circleを返すことにより、メソッドチェーンを実装できる
+    fn grow(&self, increment: f64) -> Circle {
+        Circle {
+            x: self.x,
+            y: self.y,
+            radius: self.radius + increment,
+        }
     }
 }
 fn main() {
@@ -18,4 +27,6 @@ fn main() {
         radius: 2.0,
     };
     println!("{}", c.area());
+    let d = c.grow(2.0).area();
+    println!("{}", d);
 }
