@@ -9,4 +9,16 @@ fn main() {
 
     // 特定インデックスへ添字によるアクセス (添字はusize型)
     println!("The third element of v is {}", v[2]);
+
+    // forによるイテレーティング
+    let mut v = vec![1, 2, 3, 4, 5];
+    for i in &v {
+        println!("A reference to {}", i);
+    }
+    for i in &mut v {
+        println!("A mutable reference to {}", i);
+    }
+    for i in v {
+        println!("Take ownership of the vector and its element {}", i);
+    }
 }
